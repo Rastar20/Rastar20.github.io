@@ -1,3 +1,10 @@
 body{
     color: #09090A;
     }
+    element.style {
+}
+user agent stylesheettable {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
