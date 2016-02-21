@@ -1,10 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
 body{
     color: #09090A;
     }
-    element.style {
+table, td, th {    
+    border: 1px solid #ddd;
+    text-align: left;
 }
-user agent stylesheettable {
-    display: table;
-    border-collapse: separate;
-    border-spacing: 2px;
-    border-color: grey;
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+
+
