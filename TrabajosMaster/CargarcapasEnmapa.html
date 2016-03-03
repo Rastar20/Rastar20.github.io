@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>Simple Map</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.15/esri/css/esri.css">
+    <style>
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script src="https://js.arcgis.com/3.15/"></script>
+    <script>
+
+    var tiled = "http://sampleserver6.arcgisonline.com/arcgis/rest/services/Toronto/ImageServer";
+    var dynamic = "http://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer";
+    var Feature = "http://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/0";
+    var Feature2 = "http://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/1";
+    var map;
+    var dynamicLayer;
+    require([
+        "esri/map",
+        "esri/graphic",
+        "esri/layers/ArcGISTiledMapServiceLayer",
+        "esri/layers/ArcGISDynamicMapServiceLayer",
+        "esri/layers/FeatureLayer",
+        "dojo/domReady!"], 
+    function (Map,Tiled,ArcGISTiledMapServiceLayer,ArcGISDynamicMapServiceLayer,FeatureLayer) {
+        map = new Map("map",{
+                basemap: "topo", 
+                center: [-79.38, 43.67],
+                zoom: 10
+            });
+            //Definimos y añadimps una capa cacheada
+
+        var tiledLayer = new ArcGISTiledMapServiceLayer(tiled,{
+            id:"dinamico"});
+        
+        map.addLayer(tiledLayer); 
+           
+        dynamicLayer = new ArcGISDynamicMapServiceLayer(dynamic,{id:"Dyn"});
+        map.addLayer(dynamicLayer);
+
+        //desactivo la capa que corresponde al índice 0 del servicio
+        var arrayVisibilidad = [-1,1,2,3];
+        dynamicLayer.setVisibleLayers(arrayVisibilidad);
+
+
+        var FeatureLayer2 = new FeatureLayer(Feature2,{id:"roads"});
+        var FeatureLayer = new FeatureLayer(Feature,{id:"points"});
+    
+
+
+        //map.addLayer(FeatureLayer);
+        //map.addLayer(FeatureLayer2);
+
+
+        
+    });
+
+    </script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
